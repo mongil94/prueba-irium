@@ -1,5 +1,8 @@
 {
   "MAIN": {
     "TITLE": "Irium Challenge"
+  },
+  "FILTER_LIST": {
+    "INPUT": "Search a Hero"
   }
 }
