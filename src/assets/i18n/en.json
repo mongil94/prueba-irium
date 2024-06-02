@@ -4,5 +4,16 @@
   },
   "FILTER_LIST": {
     "INPUT": "Search a Hero"
+  },
+  "TABLE": {
+    "HERO_NAME": "Hero Name",
+    "HUMAN_NAME": "Human Name",
+    "AGE": "Age"
+  },
+  "ERROR": {
+    "NO_DATA": "Your data will appear here"
+  },
+  "BUTTON": {
+    "NEW_HERO": "New Hero"
   }
 }

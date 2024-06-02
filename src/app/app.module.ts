@@ -18,6 +18,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
+import { HeroService } from './services/hero.service';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [AppComponent, VIEWS],
@@ -39,8 +42,10 @@ import { MatTableModule } from '@angular/material/table';
     MatInputModule,
     BrowserAnimationsModule,
     MatTableModule,
+    CommonModule,
+    MatButtonModule,
   ],
-  providers: [],
+  providers: [HeroService],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
 })
