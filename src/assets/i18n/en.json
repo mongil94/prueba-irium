@@ -1,6 +1,8 @@
 {
   "MAIN": {
-    "TITLE": "Irium Challenge"
+    "TITLE": "Irium Challenge",
+    "YES": "Yes",
+    "NO": "No"
   },
   "FILTER_LIST": {
     "INPUT": "Search a Hero"
@@ -15,5 +17,8 @@
   },
   "BUTTON": {
     "NEW_HERO": "New Hero"
+  },
+  "DIALOG": {
+    "WISH_DELETE": "Wish to delete the record?"
   }
 }

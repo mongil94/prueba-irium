@@ -1,1 +1,6 @@
-export const TABLE_COLUMNS: string[] = ['heroName', 'humanName', 'age'];
+export const TABLE_COLUMNS: string[] = [
+  'heroName',
+  'humanName',
+  'age',
+  'actions',
+];

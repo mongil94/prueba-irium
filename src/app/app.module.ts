@@ -12,8 +12,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VIEWS } from './views';
-import { RouterModule } from '@angular/router';
-import { APP_ROUTES } from './app.routes';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,6 +19,8 @@ import { MatTableModule } from '@angular/material/table';
 import { HeroService } from './services/hero.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [AppComponent, VIEWS],
@@ -37,13 +37,14 @@ import { MatButtonModule } from '@angular/material/button';
     }),
     ReactiveFormsModule,
     FormsModule,
-    RouterModule.forRoot(APP_ROUTES),
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule,
     MatTableModule,
     CommonModule,
     MatButtonModule,
+    MatCardModule,
+    MatDialogModule,
   ],
   providers: [HeroService],
   bootstrap: [AppComponent],

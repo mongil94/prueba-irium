@@ -1,15 +1,23 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Subject, first, takeUntil } from 'rxjs';
+import { DialogDeleteComponent } from 'src/app/components/dialog-delete/dialog-delete.component';
 import { TABLE_COLUMNS } from 'src/app/constants/table-columns.constant';
 import { Hero } from 'src/app/interfaces/heroes/hero.interface';
 import { HeroService } from 'src/app/services/hero.service';
 
 @Component({
   templateUrl: 'filter-list.component.html',
+  styleUrls: ['filter-list.component.scss'],
 })
 export class FilterListComponent implements OnInit, OnDestroy {
-  constructor(private _heroService: HeroService) {}
+  constructor(
+    private _heroService: HeroService,
+    private _router: Router,
+    private _dialog: MatDialog
+  ) {}
 
   private _destroy$: Subject<void> = new Subject<void>();
 
@@ -28,6 +36,28 @@ export class FilterListComponent implements OnInit, OnDestroy {
         next: (response) => {
           this.dataTable = response;
         },
+      });
+  }
+
+  public goToNewHero() {
+    this._router.navigateByUrl('new');
+  }
+
+  public editRow(ev: Hero) {
+    console.log(ev);
+  }
+
+  public deteleRow(ev: Hero) {
+    const dialogRef = this._dialog.open(DialogDeleteComponent);
+    dialogRef
+      .afterClosed()
+      .pipe(first())
+      .subscribe((result) => {
+        result
+          ? (this.dataSource = [
+              ...this.dataSource.filter((item) => ev.id !== item.id),
+            ])
+          : null;
       });
   }
 

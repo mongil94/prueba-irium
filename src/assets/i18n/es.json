@@ -1,6 +1,8 @@
 {
   "MAIN": {
-    "TITLE": "Prueba Irium"
+    "TITLE": "Prueba Irium",
+    "YES": "Sí",
+    "NO": "No"
   },
   "FILTER_LIST": {
     "INPUT": "Busque un Héroe"
@@ -15,5 +17,8 @@
   },
   "BUTTON": {
     "NEW_HERO": "Nuevo Héroe"
+  },
+  "DIALOG": {
+    "WISH_DELETE": "¿Desea eliminar el registro?"
   }
 }

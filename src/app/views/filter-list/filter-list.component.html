@@ -5,7 +5,7 @@
       <input matInput formControlName="hero" />
     </mat-form-field>
   </form>
-  <button mat-stroked-button color="primary">
+  <button mat-stroked-button color="primary" (click)="goToNewHero()">
     {{ "BUTTON.NEW_HERO" | translate }}
   </button>
 </div>
@@ -13,7 +13,7 @@
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="heroName">
       <th mat-header-cell *matHeaderCellDef>
-        {{ "TABLE.HUMAN_NAME" | translate }}
+        {{ "TABLE.HERO_NAME" | translate }}
       </th>
       <td mat-cell *matCellDef="let element">{{ element.heroName }}</td>
     </ng-container>
@@ -30,12 +30,28 @@
       <td mat-cell *matCellDef="let element">{{ element.age }}</td>
     </ng-container>
 
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <span class="material-icons span__pointer" (click)="editRow(element)">
+          edit
+        </span>
+        <span class="material-icons span__pointer" (click)="deteleRow(element)">
+          delete
+        </span>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 </div>
 <ng-template #noData>
   <div class="d-flex justify-content-center">
-    {{ "ERROR.NO_DATA" | translate }}
+    <mat-card class="col-3">
+      <mat-card-content class="d-flex justify-content-center">{{
+        "ERROR.NO_DATA" | translate
+      }}</mat-card-content>
+    </mat-card>
   </div>
 </ng-template>
