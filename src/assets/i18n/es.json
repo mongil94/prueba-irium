@@ -16,9 +16,14 @@
     "NO_DATA": "Aquí aparecerán tus datos"
   },
   "BUTTON": {
-    "NEW_HERO": "Nuevo Héroe"
+    "NEW_HERO": "Nuevo Héroe",
+    "CREATE": "Crear",
+    "CANCEL": "Cancelar"
   },
   "DIALOG": {
     "WISH_DELETE": "¿Desea eliminar el registro?"
+  },
+  "NEW_EDIT_HERO": {
+    "TITLE": "Creación de Nuevo Héroe"
   }
 }

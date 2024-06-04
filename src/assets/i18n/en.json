@@ -16,9 +16,14 @@
     "NO_DATA": "Your data will appear here"
   },
   "BUTTON": {
-    "NEW_HERO": "New Hero"
+    "NEW_HERO": "New Hero",
+    "CREATE": "Create",
+    "CANCEL": "Cancel"
   },
   "DIALOG": {
     "WISH_DELETE": "Wish to delete the record?"
+  },
+  "NEW_EDIT_HERO": {
+    "TITLE": "New Hero Creation"
   }
 }

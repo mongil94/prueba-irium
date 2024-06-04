@@ -43,7 +43,7 @@ export class FilterListComponent implements OnInit, OnDestroy {
     this._router.navigateByUrl('new');
   }
 
-  public editRow(ev: Hero) {
+  public editHero(ev: Hero) {
     console.log(ev);
   }
 
@@ -54,9 +54,13 @@ export class FilterListComponent implements OnInit, OnDestroy {
       .pipe(first())
       .subscribe((result) => {
         result
-          ? (this.dataSource = [
-              ...this.dataSource.filter((item) => ev.id !== item.id),
-            ])
+          ? this._heroService
+              .deleteHero(ev.id, this.dataSource, this.dataTable)
+              .pipe(first())
+              .subscribe((response) => {
+                this.dataSource = response.heroList;
+                this.dataTable = response.fullHeroList;
+              })
           : null;
       });
   }
