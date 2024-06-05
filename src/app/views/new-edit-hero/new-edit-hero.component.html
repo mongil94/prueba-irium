@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
   <mat-card class="col-7 mt-3">
     <mat-card-header>
-      <mat-card-title>{{ "NEW_EDIT_HERO.TITLE" | translate }}</mat-card-title>
+      <mat-card-title>{{ titleComponent }}</mat-card-title>
     </mat-card-header>
     <mat-card-content class="col">
       <form
@@ -15,12 +15,19 @@
 
         <mat-form-field class="example-full-width col-3 ml-3">
           <mat-label>{{ "TABLE.HUMAN_NAME" | translate }}</mat-label>
-          <input matInput formControlName="humanName" type="text" required />
+          <input matInput formControlName="humanName" required />
         </mat-form-field>
 
         <mat-form-field class="example-full-width col-2 ml-3">
           <mat-label>{{ "TABLE.AGE" | translate }}</mat-label>
-          <input matInput formControlName="age" type="text" required />
+          <input
+            matInput
+            formControlName="age"
+            type="text"
+            mask="0*"
+            maxlength="2"
+            required
+          />
         </mat-form-field>
       </form>
     </mat-card-content>
@@ -32,9 +39,10 @@
         mat-flat-button
         color="primary"
         class="m-2"
-        (click)="createHero()"
+        (click)="recordHero()"
+        [disabled]="!isAllowRecord"
       >
-        {{ "BUTTON.CREATE" | translate }}
+        {{ buttonPrimary }}
       </button>
     </mat-card-actions>
   </mat-card>

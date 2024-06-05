@@ -18,12 +18,14 @@
   "BUTTON": {
     "NEW_HERO": "Nuevo Héroe",
     "CREATE": "Crear",
+    "EDIT": "Editar",
     "CANCEL": "Cancelar"
   },
   "DIALOG": {
     "WISH_DELETE": "¿Desea eliminar el registro?"
   },
   "NEW_EDIT_HERO": {
-    "TITLE": "Creación de Nuevo Héroe"
+    "TITLE_CREATE": "Creación de Nuevo Héroe",
+    "TITLE_EDIT": "Edición de Héroe"
   }
 }

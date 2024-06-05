@@ -7,11 +7,11 @@ const server = jsonServer.create();
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
 
-server.get("/api/heroes", (req, res, next) => {
+server.get("/api/heroes", (req, res) => {
   res.status(200).send(heroData.getHeroes);
 });
 
-server.delete("/api/heroes/:id", (req, res) => {
+server.delete("/api/hero/:id", (req, res) => {
   res.status(200).send(heroData.deleteHero);
 });
 

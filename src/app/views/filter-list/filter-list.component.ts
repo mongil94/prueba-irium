@@ -4,7 +4,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subject, first, takeUntil } from 'rxjs';
 import { DialogDeleteComponent } from 'src/app/components/dialog-delete/dialog-delete.component';
+import { EMPTY_HERO } from 'src/app/constants/empty-hero.constant';
 import { TABLE_COLUMNS } from 'src/app/constants/table-columns.constant';
+import { OriginHero } from 'src/app/enums/origin-hero.enum';
+import { HeroOptions } from 'src/app/interfaces/heroes/hero-edited-created.interface';
 import { Hero } from 'src/app/interfaces/heroes/hero.interface';
 import { HeroService } from 'src/app/services/hero.service';
 
@@ -27,6 +30,7 @@ export class FilterListComponent implements OnInit, OnDestroy {
   public dataSource: Hero[] = [];
   public dataTable: Hero[] = [];
   public displayedColumns: string[] = TABLE_COLUMNS;
+  public isLoading = false;
 
   private _getHeroes() {
     this._heroService
@@ -39,12 +43,48 @@ export class FilterListComponent implements OnInit, OnDestroy {
       });
   }
 
+  private _getHeroData() {
+    this._heroService.heroData$.pipe(first()).subscribe({
+      next: (result) => {
+        if (result.origin === OriginHero.NONE) {
+          this._getHeroes();
+          this.isLoading = true;
+          document
+            .getElementById('main-container')
+            ?.classList.add('position-relative');
+          setTimeout(() => {
+            this.isLoading = false;
+            document
+              .getElementById('main-container')
+              ?.classList.remove('position-relative');
+          }, 1000);
+        } else {
+          this.dataTable = this._heroService.editHeroList(result);
+        }
+      },
+    });
+  }
+
   public goToNewHero() {
+    const heroOptions: HeroOptions = {
+      heroList: this.dataSource,
+      fullHeroList: this.dataTable,
+      origin: OriginHero.NEW,
+      hero: EMPTY_HERO,
+    };
+    this._heroService.setHeroData(heroOptions);
     this._router.navigateByUrl('new');
   }
 
   public editHero(ev: Hero) {
-    console.log(ev);
+    const heroOptions: HeroOptions = {
+      heroList: this.dataSource,
+      fullHeroList: this.dataTable,
+      origin: OriginHero.EDIT,
+      hero: ev,
+    };
+    this._heroService.setHeroData(heroOptions);
+    this._router.navigateByUrl('edit');
   }
 
   public deteleRow(ev: Hero) {
@@ -66,7 +106,7 @@ export class FilterListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._getHeroes();
+    this._getHeroData();
     this.filterListForm
       .get('hero')
       ?.valueChanges.pipe(takeUntil(this._destroy$))
