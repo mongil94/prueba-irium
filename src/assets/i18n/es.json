@@ -27,5 +27,8 @@
   "NEW_EDIT_HERO": {
     "TITLE_CREATE": "Creación de Nuevo Héroe",
     "TITLE_EDIT": "Edición de Héroe"
+  },
+  "SNACK_BAR": {
+    "CLOSE": "Cerrar"
   }
 }

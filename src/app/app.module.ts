@@ -23,6 +23,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [AppComponent, VIEWS],
@@ -49,6 +50,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatDialogModule,
     NgxMaskDirective,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
   ],
   providers: [HeroService, provideNgxMask()],
   bootstrap: [AppComponent],

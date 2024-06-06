@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Subject, first, takeUntil } from 'rxjs';
 import { DialogDeleteComponent } from 'src/app/components/dialog-delete/dialog-delete.component';
 import { EMPTY_HERO } from 'src/app/constants/empty-hero.constant';
@@ -19,7 +21,9 @@ export class FilterListComponent implements OnInit, OnDestroy {
   constructor(
     private _heroService: HeroService,
     private _router: Router,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _snackBar: MatSnackBar,
+    private _translateService: TranslateService
   ) {}
 
   private _destroy$: Subject<void> = new Subject<void>();
@@ -97,9 +101,16 @@ export class FilterListComponent implements OnInit, OnDestroy {
           ? this._heroService
               .deleteHero(ev.id, this.dataSource, this.dataTable)
               .pipe(first())
-              .subscribe((response) => {
-                this.dataSource = response.heroList;
-                this.dataTable = response.fullHeroList;
+              .subscribe({
+                next: (response) => {
+                  this.dataSource = response.heroList;
+                  this.dataTable = response.fullHeroList;
+                  this._snackBar.open(
+                    response.message,
+                    this._translateService.instant('SNACK_BAR.CLOSE'),
+                    { duration: 2000 }
+                  );
+                },
               })
           : null;
       });

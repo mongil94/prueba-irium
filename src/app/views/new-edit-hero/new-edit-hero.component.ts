@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject, first, takeUntil } from 'rxjs';
@@ -16,7 +17,8 @@ export class NewEditHeroComponent implements OnInit, OnDestroy {
   constructor(
     private _heroService: HeroService,
     private _router: Router,
-    private _translateService: TranslateService
+    private _translateService: TranslateService,
+    private _snackBar: MatSnackBar
   ) {}
 
   private _heroCreated: Hero;
@@ -87,6 +89,11 @@ export class NewEditHeroComponent implements OnInit, OnDestroy {
                   hero: this._heroEdited,
                   origin: OriginHero.EDIT,
                 });
+                this._snackBar.open(
+                  response.message,
+                  this._translateService.instant('SNACK_BAR.CLOSE'),
+                  { duration: 2000 }
+                );
               },
               complete: () => {
                 this._router.navigateByUrl('/');
@@ -99,6 +106,11 @@ export class NewEditHeroComponent implements OnInit, OnDestroy {
             .subscribe({
               next: (response) => {
                 this._heroCreated = response.heroCreated;
+                this._snackBar.open(
+                  response.message,
+                  this._translateService.instant('SNACK_BAR.CLOSE'),
+                  { duration: 2000 }
+                );
                 this._heroService.heroData$
                   .pipe(first())
                   .subscribe((response) => {
