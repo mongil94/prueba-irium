@@ -1,0 +1,23 @@
+<form [formGroup]="createEditForm" class="mt-3 d-flex justify-content-between">
+  <mat-form-field class="example-full-width col-3 ml-3">
+    <mat-label>{{ "TABLE.HERO_NAME" | translate }}</mat-label>
+    <input matInput formControlName="heroName" type="text" required />
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width col-3 ml-3">
+    <mat-label>{{ "TABLE.HUMAN_NAME" | translate }}</mat-label>
+    <input matInput formControlName="humanName" required />
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width col-2 ml-3">
+    <mat-label>{{ "TABLE.AGE" | translate }}</mat-label>
+    <input
+      matInput
+      formControlName="age"
+      type="text"
+      mask="0*"
+      maxlength="2"
+      required
+    />
+  </mat-form-field>
+</form>

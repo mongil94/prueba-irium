@@ -1,0 +1,46 @@
+<div *ngIf="dataSource.length > 0; else noData" class="mx-3">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="heroName">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ "TABLE.HERO_NAME" | translate }}
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.heroName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="humanName">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ "TABLE.HUMAN_NAME" | translate }}
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.humanName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="age">
+      <th mat-header-cell *matHeaderCellDef>{{ "TABLE.AGE" | translate }}</th>
+      <td mat-cell *matCellDef="let element">{{ element.age }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <span class="material-icons span__pointer" (click)="editHero(element)">
+          edit
+        </span>
+        <span class="material-icons span__pointer" (click)="deteleRow(element)">
+          delete
+        </span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+<ng-template #noData>
+  <div class="d-flex justify-content-center">
+    <mat-card class="col-3">
+      <mat-card-content class="d-flex justify-content-center">{{
+        "ERROR.NO_DATA" | translate
+      }}</mat-card-content>
+    </mat-card>
+  </div>
+</ng-template>

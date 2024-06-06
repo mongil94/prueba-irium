@@ -1,17 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject, first, takeUntil } from 'rxjs';
 import { OriginHero } from 'src/app/enums/origin-hero.enum';
+import { CreateHeroForm } from 'src/app/interfaces/heroes/createHero-form.interface';
 import { HeroOptions } from 'src/app/interfaces/heroes/hero-edited-created.interface';
 import { Hero } from 'src/app/interfaces/heroes/hero.interface';
 import { HeroService } from 'src/app/services/hero.service';
 
 @Component({
   templateUrl: 'new-edit-hero.component.html',
-  styleUrls: ['new-edit-hero.component.scss'],
 })
 export class NewEditHeroComponent implements OnInit, OnDestroy {
   constructor(
@@ -25,15 +24,11 @@ export class NewEditHeroComponent implements OnInit, OnDestroy {
   private _heroEdited: Hero;
   private _destroy$: Subject<void> = new Subject<void>();
   private _heroData: HeroOptions;
+  private _createEditForm: CreateHeroForm;
 
   public titleComponent: string;
   public buttonPrimary: string;
   public isAllowRecord = false;
-  public newEditHeroForm = new FormGroup({
-    heroName: new FormControl('', { nonNullable: true }),
-    humanName: new FormControl('', { nonNullable: true }),
-    age: new FormControl('', { nonNullable: true }),
-  });
 
   private _getHeroData() {
     this._heroService.heroData$.pipe(first()).subscribe({
@@ -78,7 +73,7 @@ export class NewEditHeroComponent implements OnInit, OnDestroy {
       next: (result) => {
         if (result.origin === OriginHero.EDIT) {
           this._heroService
-            .editHero(this.newEditHeroForm.getRawValue(), result.hero.id)
+            .editHero(this._createEditForm, result.hero.id)
             .pipe(first())
             .subscribe({
               next: (response) => {
@@ -101,7 +96,7 @@ export class NewEditHeroComponent implements OnInit, OnDestroy {
             });
         } else {
           this._heroService
-            .createHero(this.newEditHeroForm.getRawValue())
+            .createHero(this._createEditForm)
             .pipe(first())
             .subscribe({
               next: (response) => {
@@ -133,26 +128,16 @@ export class NewEditHeroComponent implements OnInit, OnDestroy {
     });
   }
 
+  public getOutputForm(event: CreateHeroForm) {
+    this._createEditForm = event;
+  }
+
+  public getOutputIsAllowRecord(event: boolean) {
+    this.isAllowRecord = event;
+  }
+
   ngOnInit(): void {
     this._getHeroData();
-    if (this._heroData.origin === OriginHero.EDIT) {
-      this.newEditHeroForm.patchValue({
-        heroName: this._heroData.hero.heroName,
-        humanName: this._heroData.hero.humanName,
-        age: this._heroData.hero.age,
-      });
-      this.isAllowRecord = true;
-    }
-    this.newEditHeroForm.valueChanges
-      .pipe(takeUntil(this._destroy$))
-      .subscribe({
-        next: () => {
-          const heroName = this.newEditHeroForm.get('heroName')?.value;
-          const humanName = this.newEditHeroForm.get('humanName')?.value;
-          const age = this.newEditHeroForm.get('age')?.value;
-          this.isAllowRecord = !!(heroName && humanName && age);
-        },
-      });
   }
 
   ngOnDestroy(): void {
