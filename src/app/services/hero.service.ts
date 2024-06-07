@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Hero } from '../interfaces/heroes/hero.interface';
@@ -27,7 +27,7 @@ export class HeroService {
   }
 
   get heroData$(): Observable<HeroOptions> {
-    return this._heroData$.asObservable();
+    return this._heroData$;
   }
 
   public setHeroData(value: HeroOptions) {

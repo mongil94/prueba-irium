@@ -1,18 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, NgZone, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { first } from 'rxjs';
-import { OriginHero } from 'src/app/enums/origin-hero.enum';
 import { HeroOptions } from 'src/app/interfaces/heroes/hero-edited-created.interface';
 import { Hero } from 'src/app/interfaces/heroes/hero.interface';
-import { HeroService } from 'src/app/services/hero.service';
+import { HeroService } from '../../services/hero.service';
 import { DialogDeleteComponent } from '../dialog-delete/dialog-delete.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { TABLE_COLUMNS } from 'src/app/constants/table-columns.constant';
+import { TABLE_COLUMNS } from '../../constants/table-columns.constant';
 import { MatCardModule } from '@angular/material/card';
+import { OriginHero } from '../../enums/index';
 
 @Component({
   selector: 'table-heroes',
@@ -27,7 +27,8 @@ export class TableHeroesComponent {
     private _router: Router,
     private _dialog: MatDialog,
     private _snackBar: MatSnackBar,
-    private _translateService: TranslateService
+    private _translateService: TranslateService,
+    private ngZone: NgZone
   ) {}
 
   public displayedColumns: string[] = TABLE_COLUMNS;
@@ -44,7 +45,9 @@ export class TableHeroesComponent {
       hero: ev,
     };
     this._heroService.setHeroData(heroOptions);
-    this._router.navigateByUrl('edit');
+    this.ngZone.run(() => {
+      this._router.navigateByUrl('edit');
+    });
   }
 
   public deteleRow(ev: Hero) {

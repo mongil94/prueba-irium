@@ -16,10 +16,10 @@ import { MatInputModule } from '@angular/material/input';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { Subject, first, takeUntil } from 'rxjs';
-import { OriginHero } from 'src/app/enums/origin-hero.enum';
+import { OriginHero } from '../../enums/index';
 import { CreateHeroForm } from 'src/app/interfaces/heroes/createHero-form.interface';
 import { HeroOptions } from 'src/app/interfaces/heroes/hero-edited-created.interface';
-import { HeroService } from 'src/app/services/hero.service';
+import { HeroService } from '../../services/hero.service';
 
 @Component({
   selector: 'create-edit-form',

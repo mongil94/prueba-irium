@@ -1,19 +1,23 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, first, takeUntil } from 'rxjs';
-import { EMPTY_HERO } from 'src/app/constants/empty-hero.constant';
-import { OriginHero } from 'src/app/enums/origin-hero.enum';
+import { EMPTY_HERO } from '../../constants/index';
+import { OriginHero } from '../../enums/index';
 import { HeroOptions } from 'src/app/interfaces/heroes/hero-edited-created.interface';
 import { Hero } from 'src/app/interfaces/heroes/hero.interface';
-import { HeroService } from 'src/app/services/hero.service';
+import { HeroService } from '../../services/hero.service';
 
 @Component({
   templateUrl: 'filter-list.component.html',
   styleUrls: ['filter-list.component.scss'],
 })
 export class FilterListComponent implements OnInit, OnDestroy {
-  constructor(private _heroService: HeroService, private _router: Router) {}
+  constructor(
+    private _heroService: HeroService,
+    private _router: Router,
+    private ngZone: NgZone
+  ) {}
 
   private _destroy$: Subject<void> = new Subject<void>();
 
@@ -65,7 +69,9 @@ export class FilterListComponent implements OnInit, OnDestroy {
       hero: EMPTY_HERO,
     };
     this._heroService.setHeroData(heroOptions);
-    this._router.navigateByUrl('new');
+    this.ngZone.run(() => {
+      this._router.navigateByUrl('new');
+    });
   }
 
   public outputDataTable(event: Hero[]) {

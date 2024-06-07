@@ -1,13 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject, first, takeUntil } from 'rxjs';
-import { OriginHero } from 'src/app/enums/origin-hero.enum';
+import { OriginHero } from '../../enums/index';
 import { CreateHeroForm } from 'src/app/interfaces/heroes/createHero-form.interface';
 import { HeroOptions } from 'src/app/interfaces/heroes/hero-edited-created.interface';
 import { Hero } from 'src/app/interfaces/heroes/hero.interface';
-import { HeroService } from 'src/app/services/hero.service';
+import { HeroService } from '../../services/hero.service';
 
 @Component({
   templateUrl: 'new-edit-hero.component.html',
@@ -17,7 +17,8 @@ export class NewEditHeroComponent implements OnInit, OnDestroy {
     private _heroService: HeroService,
     private _router: Router,
     private _translateService: TranslateService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private ngZone: NgZone
   ) {}
 
   private _heroCreated: Hero;
@@ -65,7 +66,9 @@ export class NewEditHeroComponent implements OnInit, OnDestroy {
   }
 
   public cancel() {
-    this._router.navigateByUrl('/');
+    this.ngZone.run(() => {
+      this._router.navigateByUrl('/');
+    });
   }
 
   public recordHero() {
@@ -91,7 +94,9 @@ export class NewEditHeroComponent implements OnInit, OnDestroy {
                 );
               },
               complete: () => {
-                this._router.navigateByUrl('/');
+                this.ngZone.run(() => {
+                  this._router.navigateByUrl('/');
+                });
               },
             });
         } else {
@@ -118,8 +123,8 @@ export class NewEditHeroComponent implements OnInit, OnDestroy {
                   });
               },
               complete: () => {
-                this._router.navigateByUrl('/', {
-                  state: { origin: OriginHero.NEW },
+                this.ngZone.run(() => {
+                  this._router.navigateByUrl('/');
                 });
               },
             });
