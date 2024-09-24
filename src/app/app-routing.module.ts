@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FilterListComponent } from './views/filter-list/filter-list.component';
 import { NewEditHeroComponent } from './views/new-edit-hero/new-edit-hero.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
-  { path: '', component: FilterListComponent },
+  { path: '', component: LoginComponent },
   { path: 'new', component: NewEditHeroComponent },
   { path: 'edit', component: NewEditHeroComponent },
 ];
