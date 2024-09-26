@@ -6,7 +6,7 @@ import { EMPTY_HERO } from '../../constants/index';
 import { OriginHero } from '../../enums/index';
 import { HeroOptions } from 'src/app/interfaces/heroes/hero-edited-created.interface';
 import { Hero } from 'src/app/interfaces/heroes/hero.interface';
-import { HeroService } from '../../services/hero.service';
+import { HeroService } from 'src/app/services/hero/hero.service';
 
 @Component({
   templateUrl: 'filter-list.component.html',

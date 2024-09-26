@@ -1,5 +1,6 @@
 const jsonServer = require("json-server");
 const heroData = require("../server/data/heroes");
+const loginData = require("../server/data/login");
 
 const middlewares = jsonServer.defaults();
 const server = jsonServer.create();
@@ -21,6 +22,10 @@ server.put("/api/hero", (req, res) => {
 
 server.post("/api/hero", (req, res) => {
   res.status(200).send(heroData.createHero);
+});
+
+server.get("/api/login", (req, res) => {
+  res.status(200).send(loginData.goLogin);
 });
 
 server.listen(3000, () => {

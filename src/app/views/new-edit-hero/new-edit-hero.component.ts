@@ -7,7 +7,7 @@ import { OriginHero } from '../../enums/index';
 import { CreateHeroForm } from 'src/app/interfaces/heroes/createHero-form.interface';
 import { HeroOptions } from 'src/app/interfaces/heroes/hero-edited-created.interface';
 import { Hero } from 'src/app/interfaces/heroes/hero.interface';
-import { HeroService } from '../../services/hero.service';
+import { HeroService } from 'src/app/services/hero/hero.service';
 
 @Component({
   templateUrl: 'new-edit-hero.component.html',

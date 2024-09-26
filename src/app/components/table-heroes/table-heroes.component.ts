@@ -7,12 +7,12 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { first } from 'rxjs';
 import { HeroOptions } from 'src/app/interfaces/heroes/hero-edited-created.interface';
 import { Hero } from 'src/app/interfaces/heroes/hero.interface';
-import { HeroService } from '../../services/hero.service';
 import { DialogDeleteComponent } from '../dialog-delete/dialog-delete.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TABLE_COLUMNS } from '../../constants/table-columns.constant';
 import { MatCardModule } from '@angular/material/card';
 import { OriginHero } from '../../enums/index';
+import { HeroService } from 'src/app/services/hero/hero.service';
 
 @Component({
   selector: 'table-heroes',

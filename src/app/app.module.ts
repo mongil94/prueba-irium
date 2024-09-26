@@ -16,7 +16,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
-import { HeroService } from './services/hero.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -25,6 +24,8 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { COMPONENTS } from './components';
+import { HeroService } from './services/hero/hero.service';
+import { LoginService } from './services/login/login.service';
 
 @NgModule({
   declarations: [AppComponent, VIEWS],
@@ -54,7 +55,7 @@ import { COMPONENTS } from './components';
     MatSnackBarModule,
     COMPONENTS,
   ],
-  providers: [HeroService, provideNgxMask()],
+  providers: [HeroService, LoginService, provideNgxMask()],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
 })

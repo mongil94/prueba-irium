@@ -1,15 +1,15 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
-import { Hero } from '../interfaces/heroes/hero.interface';
-import { API_CONTEXT } from '../constants/api-context.constant';
-import { DeleteHeroResponse } from '../interfaces/heroes/deleteHero-response.interface';
-import { CreateHeroResponse } from '../interfaces/heroes/createHero-response.interface';
-import { CreateHeroForm } from '../interfaces/heroes/createHero-form.interface';
-import { EditHeroResponse } from '../interfaces/heroes/editHero-response.interface';
-import { HeroOptions } from '../interfaces/heroes/hero-edited-created.interface';
-import { OriginHero } from '../enums/origin-hero.enum';
-import { HERO_OPTIONS } from '../constants/hero-options.constant';
+import { Hero } from '../../interfaces/heroes/hero.interface';
+import { API_CONTEXT } from '../../constants/api-context.constant';
+import { DeleteHeroResponse } from '../../interfaces/heroes/deleteHero-response.interface';
+import { CreateHeroResponse } from '../../interfaces/heroes/createHero-response.interface';
+import { CreateHeroForm } from '../../interfaces/heroes/createHero-form.interface';
+import { EditHeroResponse } from '../../interfaces/heroes/editHero-response.interface';
+import { HeroOptions } from '../../interfaces/heroes/hero-edited-created.interface';
+import { OriginHero } from '../../enums/origin-hero.enum';
+import { HERO_OPTIONS } from '../../constants/hero-options.constant';
 
 const heroOptions: HeroOptions = HERO_OPTIONS;
 

@@ -19,7 +19,7 @@ import { Subject, first, takeUntil } from 'rxjs';
 import { OriginHero } from '../../enums/index';
 import { CreateHeroForm } from 'src/app/interfaces/heroes/createHero-form.interface';
 import { HeroOptions } from 'src/app/interfaces/heroes/hero-edited-created.interface';
-import { HeroService } from '../../services/hero.service';
+import { HeroService } from 'src/app/services/hero/hero.service';
 
 @Component({
   selector: 'create-edit-form',
